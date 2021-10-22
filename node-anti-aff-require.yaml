@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: mypod-node-aff-req
+   labels:
+      app: myapp
+   annotations:
+      description: "this is sample pod"
+spec:
+   containers:
+   - name: appcon
+     image: nginx:latest
+     ports:
+     - containerPort: 80
+   - name: con2
+     image: tomcat:latest
+     ports:
+     - containerPort: 8080
+   affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: cpu
+            operator: NotIn
+            values:
+            - intel

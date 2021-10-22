@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: mypod-pod-aff-pre
+   labels:
+      ap: magicapp
+   annotations:
+      description: "this is sample pod"
+spec:
+   containers:
+   - name: appcon
+     image: nginx:latest
+     ports:
+     - containerPort: 80
+   - name: con2
+     image: tomcat:latest
+     ports:
+     - containerPort: 8080
+   affinity:
+    podAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - myapp
+          topologyKey: "kubernetes.io/hostname"

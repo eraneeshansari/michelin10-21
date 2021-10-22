@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: mypod-node-name
+   labels:
+      app: myapp
+spec:
+   containers:
+   - name: appcon
+     image: nginx:latest
+     ports:
+     - containerPort: 80
+   - name: con2
+     image: tomcat:latest
+     ports:
+     - containerPort: 8080
+   nodeName: ip-172-31-19-89
+
+

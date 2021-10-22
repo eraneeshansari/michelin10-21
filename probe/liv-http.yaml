@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: mypod-live-http
+   labels:
+      app: myapp
+   annotations:
+      description: "this is sample pod"
+spec:
+   containers:
+   - name: appcon
+     image: nginx:latest
+     ports:
+     - containerPort: 80
+     livenessProbe:
+        httpGet:
+           path: /index.html
+           port: 80
+        initialDelaySeconds: 10
+        periodSeconds: 5
+
+
